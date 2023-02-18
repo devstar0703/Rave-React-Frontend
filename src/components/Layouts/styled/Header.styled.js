@@ -35,18 +35,7 @@ export const Title = tagStyled.p`
 
     margin : 0px;
 `
-
-export const HeaderCarousel = tagStyled.div`
-    width : 100%;
-    box-sizing : border-box;
-
-    & .swiper {
-        width: 100%;
-        height: 100%;
-    }
-`
-
-export const CarouselItem = tagStyled.div`
+export const BackgroundDiv = tagStyled.div`
     background-image : url('${props => props.image}') ;
     background-position : center;
     background-size : cover;
@@ -135,4 +124,64 @@ export const IconDiv = tagStyled.div`
         color :white;
         font-size : 30px;
     }
+`
+
+export const HeaderCarousel = tagStyled.div`
+    width : 100%;
+    box-sizing : border-box;
+
+    & .swiper {
+        // width: 100%;
+        height: 100%;
+    }
+
+    & .swiper-slide {
+        width : 350px;
+        height : 210px;
+
+        overflow : hidden ;
+
+        position : relative;
+
+        :hover {
+            & .image {
+                transform: scale(1.2);
+            }
+        }
+    }
+`
+
+export const LinkItem = tagStyled.div`
+    background-image : url(${props => props.image}) ;
+    background-position : center;
+    background-size : cover;
+
+    transition : 0.3s;
+    
+    height : 100%;
+    width : 100%;
+`
+
+export const LinkBackOverlay = tagStyled.div`
+    width : 100%;
+    height : 100%;
+
+    background : #00000045 ;
+
+    padding-left : 10px;
+    padding-bottom : 20px;
+    
+    position : absolute;
+
+    left : 0px;
+    top : 0px;
+
+    display : flex;
+    flex-direction : column;
+    justify-content : flex-end;
+`
+
+export const LinkDesc = tagStyled.p`
+    color : white;
+    font-size : 1.1rem;
 `

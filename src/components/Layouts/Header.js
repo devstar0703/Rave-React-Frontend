@@ -5,11 +5,12 @@ import { useTheme } from '@mui/styles';
 import { 
     HeaderBody, HeaderTop, HeaderCarousel,
     Title,
-    CarouselItem, 
+    BackgroundDiv, 
     BackOverlay,
     Prefix, Train, Location,Route,
     InfoRow, InfoItem, InfoDetail,
-    IconDiv, Status, Desc
+    IconDiv, Status, Desc,
+    LinkItem, LinkBackOverlay, LinkDesc
 } from './styled/Header.styled';
 
 import MenuIcon from '@mui/icons-material/Menu';
@@ -20,68 +21,49 @@ import SpeedOutlinedIcon from '@mui/icons-material/SpeedOutlined';
 import LandscapeOutlinedIcon from '@mui/icons-material/LandscapeOutlined';
 
 import Carousel1 from 'src/assets/header/carousel_1.png';
-import Carousel2 from 'src/assets/header/carousel_2.jpeg';
-import Carousel3 from 'src/assets/header/carousel_3.jpeg';
-import Carousel4 from 'src/assets/header/carousel_4.jpeg';
-import Carousel5 from 'src/assets/header/carousel_5.jpeg';
+
+import RouteImage from 'src/assets/header/route.png';
+import AccessImage from 'src/assets/header/internet_access.png';
+import FoodImage from 'src/assets/header/food.png';
+import AltitudeImage from 'src/assets/header/altitude.jpeg';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 const Header = () => {
     const theme = useTheme() ;
 
-    const carousel_list = [
+    const linkList = [
         {
-            prefix : 'welcome to the',
-            location : 'Bernina Express',
-            train : 'BEX 951 Chur - Tirano',
-            route : 'Chur – Tirano',
-            speed : '70km/h',
-            altitude : '608 m',
-            usage_of_data : '242 of 286 MB',
-            img : Carousel1
+            desc : "Check route info",
+            to : '/check-route',
+            image : RouteImage
         },
         {
-            prefix : 'welcome to the',
-            location : 'Bernina Express',
-            train : 'BEX 951 Chur - Tirano',
-            route : 'Chur – Tirano',
-            speed : '70km/h',
-            altitude : '608 m',
-            usage_of_data : '242 of 286 MB',
-            img : Carousel2
+            desc : 'Altitude',
+            to : '/altitude',
+            image : AltitudeImage
         },
         {
-            prefix : 'welcome to the',
-            location : 'Bernina Express',
-            train : 'BEX 951 Chur - Tirano',
-            route : 'Chur – Tirano',
-            speed : '70km/h',
-            altitude : '608 m',
-            usage_of_data : '242 of 286 MB',
-            img : Carousel3
+            desc : 'Internet Access',
+            to : '/internet-access',
+            image : AccessImage
         },
         {
-            prefix : 'welcome to the',
-            location : 'Bernina Express',
-            train : 'BEX 951 Chur - Tirano',
-            route : 'Chur – Tirano',
-            speed : '70km/h',
-            altitude : '608 m',
-            usage_of_data : '242 of 286 MB',
-            img : Carousel4
-        },
-        {
-            prefix : 'welcome to the',
-            location : 'Bernina Express',
-            train : 'BEX 951 Chur - Tirano',
-            route : 'Chur – Tirano',
-            speed : '70km/h',
-            altitude : '608 m',
-            usage_of_data : '242 of 286 MB',
-            img : Carousel5
+            desc : "Enjoy our delicious food",
+            to : "/enjoy-food",
+            image : FoodImage
         }
-    ]
+    ];
+
+    const [swiperCtrl, setSwiperCtrl] = React.useState(null) ;
+    const [currentIndex, setCurrentIndex] = React.useState(0) ;
+
+    React.useEffect(() => {
+        console.log(currentIndex);
+        swiperCtrl?.slideTo(currentIndex) ;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentIndex]) ;
+
     return (
         <>
             <HeaderBody>
@@ -91,60 +73,64 @@ const Header = () => {
                     <MenuIcon />
                 </HeaderTop>
                 
+                <BackgroundDiv
+                    image={Carousel1}
+                >
+                    <BackOverlay>
+                        <Prefix>welcome to the</Prefix>
+                        <Location>Bernina Express</Location>
+                        <Train>BEX 951 Chur - Tirano</Train>
+                        <Route><LocationOnIcon/>Chur - Tirano</Route>
+                        <InfoRow>
+                            <InfoItem>
+                                <IconDiv><SpeedOutlinedIcon /></IconDiv>
+                                <InfoDetail>
+                                    <Status>42 km/h</Status>
+                                    <Desc>Speed</Desc>
+                                </InfoDetail>
+                            </InfoItem>
+                            <InfoItem>
+                                <IconDiv><LandscapeOutlinedIcon /></IconDiv>
+                                <InfoDetail>
+                                    <Status>766 m</Status>
+                                    <Desc>Altitude</Desc>
+                                </InfoDetail>
+                            </InfoItem>
+                            <InfoItem>
+                                <IconDiv><AvTimerIcon /></IconDiv>
+                                <InfoDetail>
+                                    <Status>242 of 286 MB</Status>
+                                    <Desc>Data of Usage</Desc>
+                                </InfoDetail>
+                            </InfoItem>
+                        </InfoRow>
+                        
+                    </BackOverlay>
+                </BackgroundDiv>
                 <HeaderCarousel>
                     <Swiper
-                        style={{
-                            '--swiper-navigation-color': '#fff',
-                            '--swiper-pagination-color': '#fff',
-                        }}
+                        slidesPerView={"auto"}
+                        spaceBetween={0}
                         pagination={{
-                            type: "progressbar",
-                          }}
-                        navigation={false}
+                        clickable: true,
+                        }}
+                        onSlideChange={(e) => setCurrentIndex(e.activeIndex)}
+                        onSwiper={setSwiperCtrl}
                     >
                         {
-                            carousel_list.map((carousel, index) => (
-                                <SwiperSlide key={index}
-                                >
-                                    <CarouselItem
-                                        image={carousel.img}
-                                    >
-                                        <BackOverlay>
-                                        <Prefix>{carousel.prefix}</Prefix>
-                                        <Location>{carousel.location}</Location>
-                                        <Train>{carousel.train}</Train>
-                                        <Route><LocationOnIcon/>{carousel.route}</Route>
-                                        <InfoRow>
-                                            <InfoItem>
-                                                <IconDiv><SpeedOutlinedIcon /></IconDiv>
-                                                <InfoDetail>
-                                                    <Status>{carousel.speed}</Status>
-                                                    <Desc>Speed</Desc>
-                                                </InfoDetail>
-                                            </InfoItem>
-                                            <InfoItem>
-                                                <IconDiv><LandscapeOutlinedIcon /></IconDiv>
-                                                <InfoDetail>
-                                                    <Status>{carousel.altitude}</Status>
-                                                    <Desc>Altitude</Desc>
-                                                </InfoDetail>
-                                            </InfoItem>
-                                            <InfoItem>
-                                                <IconDiv><AvTimerIcon /></IconDiv>
-                                                <InfoDetail>
-                                                    <Status>{carousel.usage_of_data}</Status>
-                                                    <Desc>Data of Usage</Desc>
-                                                </InfoDetail>
-                                            </InfoItem>
-                                        </InfoRow>
-                                        </BackOverlay>
-                                    </CarouselItem>
+                            linkList.map((link, index) => (
+                                <SwiperSlide key={index}>
+                                    <LinkItem image={ link.image } className='image' >
+                                        
+                                    </LinkItem>
+                                    <LinkBackOverlay>
+                                        <LinkDesc>{ link.desc }</LinkDesc>
+                                    </LinkBackOverlay>
                                 </SwiperSlide>
                             ))
                         }
                     </Swiper>
                 </HeaderCarousel>
-                
             </HeaderBody>
         </>
     )
