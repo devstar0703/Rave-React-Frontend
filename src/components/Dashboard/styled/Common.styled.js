@@ -1,7 +1,7 @@
 import tagStyled from 'styled-components';
 
 export const SectionTitle = tagStyled.div`
-    font-size : 30px;
+    font-size : 25px;
     font-weight : bold;
     color: black;
     padding-bottom : 10px;

@@ -88,7 +88,7 @@ const BestMovies = () => {
     return (
         <BestMoviesDiv>
             <Row>
-                <SectionTitle>Best Movies</SectionTitle>
+                <SectionTitle>Best movies</SectionTitle>
                 <ViewMore>View More <ArrowForwardIosOutlinedIcon/></ViewMore>
             </Row>
             <Swiper

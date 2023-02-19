@@ -61,12 +61,6 @@ const Header = () => {
     const [swiperCtrl, setSwiperCtrl] = React.useState(null) ;
     const [currentIndex, setCurrentIndex] = React.useState(0) ;
 
-    React.useEffect(() => {
-        console.log(currentIndex);
-        swiperCtrl?.slideTo(currentIndex) ;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [currentIndex]) ;
-
     const goToNextSlide = () => {
         if(swiperCtrl?.isEnd) return ;
         setCurrentIndex(currentIndex + 1) ;
@@ -76,6 +70,13 @@ const Header = () => {
         if(swiperCtrl?.isBeginning) return ;
         setCurrentIndex(currentIndex - 1) ;
     }
+
+    React.useEffect(() => {
+        console.log(currentIndex);
+        swiperCtrl?.slideTo(currentIndex) ;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentIndex]) ;
+    
     return (
         <>
             <HeaderBody>
