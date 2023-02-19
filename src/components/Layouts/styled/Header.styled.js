@@ -40,7 +40,7 @@ export const BackgroundDiv = tagStyled.div`
     background-position : center;
     background-size : cover;
 
-    height : 400px;
+    height : 600px;
 
     position : relative;
 `
@@ -61,7 +61,8 @@ export const BackOverlay = tagStyled.div`
     justify-content : flex-end;
 
     padding-left : 3%;
-    padding-bottom : 40px;
+    padding-right : 3%;
+    padding-bottom : 250px;
 
     p {
         margin : 0px;
@@ -126,9 +127,29 @@ export const IconDiv = tagStyled.div`
     }
 `
 
+export const Row = tagStyled.div`
+    display : flex;
+    justify-content : space-between ;
+    align-items : flex-end;
+`
+
+export const ArrowRow = tagStyled.div`
+    display : flex;
+    gap : 10px;
+
+    svg {
+        color : white;
+        font-size : 25px;
+    }
+`
+
 export const HeaderCarousel = tagStyled.div`
     width : 100%;
     box-sizing : border-box;
+
+    position : absolute;
+    left : 0px;
+    bottom : 0px;
 
     & .swiper {
         // width: 100%;
@@ -157,7 +178,7 @@ export const LinkItem = tagStyled.div`
     background-size : cover;
 
     transition : 0.3s;
-    
+
     height : 100%;
     width : 100%;
 `

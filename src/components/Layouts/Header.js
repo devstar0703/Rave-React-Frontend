@@ -10,7 +10,8 @@ import {
     Prefix, Train, Location,Route,
     InfoRow, InfoItem, InfoDetail,
     IconDiv, Status, Desc,
-    LinkItem, LinkBackOverlay, LinkDesc
+    LinkItem, LinkBackOverlay, LinkDesc,
+    Row, ArrowRow
 } from './styled/Header.styled';
 
 import MenuIcon from '@mui/icons-material/Menu';
@@ -19,6 +20,8 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import AvTimerIcon from '@mui/icons-material/AvTimer';
 import SpeedOutlinedIcon from '@mui/icons-material/SpeedOutlined';
 import LandscapeOutlinedIcon from '@mui/icons-material/LandscapeOutlined';
+import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
+import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
 
 import Carousel1 from 'src/assets/header/carousel_1.png';
 
@@ -64,6 +67,15 @@ const Header = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentIndex]) ;
 
+    const goToNextSlide = () => {
+        if(swiperCtrl?.isEnd) return ;
+        setCurrentIndex(currentIndex + 1) ;
+    }
+
+    const goToPrevSlide = () => {
+        if(swiperCtrl?.isBeginning) return ;
+        setCurrentIndex(currentIndex - 1) ;
+    }
     return (
         <>
             <HeaderBody>
@@ -81,56 +93,65 @@ const Header = () => {
                         <Location>Bernina Express</Location>
                         <Train>BEX 951 Chur - Tirano</Train>
                         <Route><LocationOnIcon/>Chur - Tirano</Route>
-                        <InfoRow>
-                            <InfoItem>
-                                <IconDiv><SpeedOutlinedIcon /></IconDiv>
-                                <InfoDetail>
-                                    <Status>42 km/h</Status>
-                                    <Desc>Speed</Desc>
-                                </InfoDetail>
-                            </InfoItem>
-                            <InfoItem>
-                                <IconDiv><LandscapeOutlinedIcon /></IconDiv>
-                                <InfoDetail>
-                                    <Status>766 m</Status>
-                                    <Desc>Altitude</Desc>
-                                </InfoDetail>
-                            </InfoItem>
-                            <InfoItem>
-                                <IconDiv><AvTimerIcon /></IconDiv>
-                                <InfoDetail>
-                                    <Status>242 of 286 MB</Status>
-                                    <Desc>Data of Usage</Desc>
-                                </InfoDetail>
-                            </InfoItem>
-                        </InfoRow>
-                        
+                        <Row>
+                            <InfoRow>
+                                <InfoItem>
+                                    <IconDiv><SpeedOutlinedIcon /></IconDiv>
+                                    <InfoDetail>
+                                        <Status>42 km/h</Status>
+                                        <Desc>Speed</Desc>
+                                    </InfoDetail>
+                                </InfoItem>
+                                <InfoItem>
+                                    <IconDiv><LandscapeOutlinedIcon /></IconDiv>
+                                    <InfoDetail>
+                                        <Status>766 m</Status>
+                                        <Desc>Altitude</Desc>
+                                    </InfoDetail>
+                                </InfoItem>
+                                <InfoItem>
+                                    <IconDiv><AvTimerIcon /></IconDiv>
+                                    <InfoDetail>
+                                        <Status>242 of 286 MB</Status>
+                                        <Desc>Data of Usage</Desc>
+                                    </InfoDetail>
+                                </InfoItem>
+                            </InfoRow>
+                            <ArrowRow>
+                                <ArrowBackOutlinedIcon 
+                                    onClick={goToPrevSlide}
+                                />
+                                <ArrowForwardOutlinedIcon 
+                                    onClick={goToNextSlide}
+                                />
+                            </ArrowRow>
+                        </Row>
+                        <HeaderCarousel>
+                            <Swiper
+                                slidesPerView={"auto"}
+                                spaceBetween={0}
+                                pagination={{
+                                clickable: true,
+                                }}
+                                onSlideChange={(e) => setCurrentIndex(e.activeIndex)}
+                                onSwiper={setSwiperCtrl}
+                            >
+                                {
+                                    linkList.map((link, index) => (
+                                        <SwiperSlide key={index}>
+                                            <LinkItem image={ link.image } className='image' >
+                                                
+                                            </LinkItem>
+                                            <LinkBackOverlay>
+                                                <LinkDesc>{ link.desc }</LinkDesc>
+                                            </LinkBackOverlay>
+                                        </SwiperSlide>
+                                    ))
+                                }
+                            </Swiper>
+                        </HeaderCarousel>
                     </BackOverlay>
                 </BackgroundDiv>
-                <HeaderCarousel>
-                    <Swiper
-                        slidesPerView={"auto"}
-                        spaceBetween={0}
-                        pagination={{
-                        clickable: true,
-                        }}
-                        onSlideChange={(e) => setCurrentIndex(e.activeIndex)}
-                        onSwiper={setSwiperCtrl}
-                    >
-                        {
-                            linkList.map((link, index) => (
-                                <SwiperSlide key={index}>
-                                    <LinkItem image={ link.image } className='image' >
-                                        
-                                    </LinkItem>
-                                    <LinkBackOverlay>
-                                        <LinkDesc>{ link.desc }</LinkDesc>
-                                    </LinkBackOverlay>
-                                </SwiperSlide>
-                            ))
-                        }
-                    </Swiper>
-                </HeaderCarousel>
             </HeaderBody>
         </>
     )
