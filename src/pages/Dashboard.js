@@ -7,6 +7,7 @@ import {
 import BestMovies from 'src/components/Dashboard/BestMovies';
 import GreateMusics from 'src/components/Dashboard/GreatMusic';
 import MusicForTrip from 'src/components/Dashboard/MusicForTrip';
+import GiveFeedback from 'src/components/Dashboard/GiveFeedback';
 
 const Dashboard = (props) => {
 
@@ -15,6 +16,7 @@ const Dashboard = (props) => {
             <BestMovies />
             <GreateMusics />
             <MusicForTrip />
+            <GiveFeedback />
         </DashboardMain>
     )
 }

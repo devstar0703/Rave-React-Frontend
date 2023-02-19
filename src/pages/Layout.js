@@ -7,7 +7,7 @@ import { Routes , Route } from "react-router-dom";
 import { connect } from 'react-redux' ;
 
 import Header from "src/components/Layouts/Header";
-// import Footer from "src/components/Layouts/Footer";
+import Footer from "src/components/Layouts/Footer";
 import Content from "src/components/Layouts/Content";
 
 import Dashboard from "./Dashboard";
@@ -34,7 +34,7 @@ const Layout = (props) => {
                         <Route path="/dashboard" element={< Dashboard />} />
                     </Routes>
                 </Content>
-                {/* <Footer /> */}
+                <Footer />
             </RouteProvider>
         </LayoutMain>
     );
