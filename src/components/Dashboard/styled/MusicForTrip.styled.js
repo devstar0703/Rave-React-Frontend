@@ -33,7 +33,7 @@ export const MusicItem = tagStyled.div`
 
     background-image : url(${props => props.src});
     background-size: cover;
-    background-position ; center;
+    background-position : center;
 
 `
 export const MusicTitle = tagStyled.div`

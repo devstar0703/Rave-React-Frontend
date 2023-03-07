@@ -31,9 +31,11 @@ import FoodImage from 'src/assets/header/food.png';
 import AltitudeImage from 'src/assets/header/altitude.jpeg';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
+import MenuDrawer from '../Drawer/MenuDrawer';
 
 const Header = () => {
     const theme = useTheme() ;
+    const [openMenu, setOpenMenu] = React.useState(false);
 
     const linkList = [
         {
@@ -71,6 +73,8 @@ const Header = () => {
         setCurrentIndex(currentIndex - 1) ;
     }
 
+    const handleMenuDrawer = () => { return; setOpenMenu(!openMenu) }
+
     React.useEffect(() => {
         console.log(currentIndex);
         swiperCtrl?.slideTo(currentIndex) ;
@@ -81,7 +85,7 @@ const Header = () => {
         <>
             <HeaderBody>
                 <HeaderTop  theme={theme}> 
-                    <MenuIcon />
+                    <MenuIcon onClick={handleMenuDrawer}/>
                     <Title><RssFeedIcon/>Rave</Title>
                     <MenuIcon />
                 </HeaderTop>
@@ -154,6 +158,11 @@ const Header = () => {
                     </BackOverlay>
                 </BackgroundDiv>
             </HeaderBody>
+
+            <MenuDrawer 
+                open={openMenu}
+                handleDrawer={handleMenuDrawer}
+            />
         </>
     )
 }

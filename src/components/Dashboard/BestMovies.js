@@ -89,7 +89,7 @@ const BestMovies = () => {
         <BestMoviesDiv>
             <Row>
                 <SectionTitle>Best movies</SectionTitle>
-                <ViewMore>View More <ArrowForwardIosOutlinedIcon/></ViewMore>
+                <ViewMore>View More<ArrowForwardIosOutlinedIcon/></ViewMore>
             </Row>
             <Swiper
                 slidesPerView={"auto"}
